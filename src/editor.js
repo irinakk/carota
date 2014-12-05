@@ -278,11 +278,15 @@ exports.create = function(element) {
         return handled;
     };
 
-    dom.handleEvent(textArea, 'keydown', function(ev) {
+       dom.handleEvent(textArea, 'keydown', function(ev) {
+       
         if (handleKey(ev.keyCode, ev.shiftKey, ev.ctrlKey)) {
             return false;
         }
         console.log(ev.which);
+        this_key=ev.which;                  //
+
+
     });
 
     var paint = function() {
@@ -328,6 +332,10 @@ exports.create = function(element) {
 
     dom.handleEvent(textArea, 'input', function() {
         var newText = textArea.value;
+        if(this_key===229&&newText.charCodeAt(newText.length-1)<225){
+            console.log(textArea.value);
+        }else{
+                  //改
         if (textAreaContent != newText) {
             textAreaContent = '';
             textArea.value = '';
@@ -335,7 +343,9 @@ exports.create = function(element) {
                 newText = richClipboard;
             }
             doc.insert(newText);
-        }
+      
+    }
+    }
     });
 
     var updateTextArea = function() {
